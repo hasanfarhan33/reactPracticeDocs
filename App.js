@@ -1,32 +1,36 @@
-import React, { useState } from "react";
-import { Button, Text, View } from "react-native";
+import React from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
-const Cat = (props) => {
-  const [isHungry, setIsHungry] = useState(true);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 22,
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+});
 
+const FlatListBasics = () => {
   return (
-    <View>
-      <Text>
-        I am {props.name}, and I am {isHungry ? "hungry" : "full"}!
-      </Text>
-      <Button
-        onPress={() => {
-          setIsHungry(false);
-        }}
-        disabled={!isHungry}
-        title={isHungry ? "Pour me some milk, please!" : "Thank you!"}
-      />
+    <View style={styles.container}>
+      <FlatList
+        data={[
+          { key: "Devin" },
+          { key: "Dan" },
+          { key: "Dominic" },
+          { key: "Idiot" },
+          { key: "Jack" },
+          { key: "Abraham" },
+          { key: "Jonathan" },
+          { key: "Jameson" },
+        ]}
+        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
+      ></FlatList>
     </View>
   );
 };
 
-const Cafe = () => {
-  return (
-    <>
-      <Cat name="Munkustrap" />
-      <Cat name="Spot" />
-    </>
-  );
-};
-
-export default Cafe;
+export default FlatListBasics;
