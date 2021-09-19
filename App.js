@@ -1,29 +1,32 @@
 import React, { useState } from "react";
-import { Text, View, Image, ScrollView, TextInput } from "react-native";
+import { Button, Text, View } from "react-native";
 
-const YourApp = () => {
-  const myName = "Goomba";
-  const getFullName = (firstName, secondName) => {
-    return firstName + " " + secondName;
-  };
+const Cat = (props) => {
+  const [isHungry, setIsHungry] = useState(true);
 
   return (
-    <ScrollView>
-      <Text>This text is inside scroll view</Text>
-      <View>
-        <Text>My name is {myName}.</Text>
-        <Text>My name is {getFullName("Farhan", "Hasan")}</Text>
-        <Image
-          source={{ uri: "https://reactnative.dev/docs/assets/p_cat2.png" }}
-          style={{ width: 150, height: 150 }}
-        ></Image>
-      </View>
-      <TextInput
-        style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-        defaultValue="You can type whatever the hell you wanna type here"
-      ></TextInput>
-    </ScrollView>
+    <View>
+      <Text>
+        I am {props.name}, and I am {isHungry ? "hungry" : "full"}!
+      </Text>
+      <Button
+        onPress={() => {
+          setIsHungry(false);
+        }}
+        disabled={!isHungry}
+        title={isHungry ? "Pour me some milk, please!" : "Thank you!"}
+      />
+    </View>
   );
 };
 
-export default YourApp;
+const Cafe = () => {
+  return (
+    <>
+      <Cat name="Munkustrap" />
+      <Cat name="Spot" />
+    </>
+  );
+};
+
+export default Cafe;
